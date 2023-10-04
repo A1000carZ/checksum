@@ -24,7 +24,6 @@ int main()
     string base16 = "10";
     string dataType = "00";
     vector<vector<string> > table;
-    cout << "Checksum" << endl;
     int menuChoice;
 
     // Initialize the table with rows and columns
@@ -43,12 +42,12 @@ int main()
 
     while (true)
     {
-        cout<<"Sanchez Velazquez A. Z. 4CM23"<<endl;
-        cout << "Bienvenido al generador Checksum" << endl;
-        cout << "Menu" << endl
-             << "1.Asignar y/o editar valores a la tabla" << endl
-             << "2.Ver tabla" << endl
-             << "3.Generar archivo" << endl;
+        cout<<"Sanchez Velazquez Amilcar Z. 4CM23"<<endl<<endl;
+        cout << "Bienvenido al generador Checksum" << endl<<endl;
+        cout << "Menu" << endl<<endl
+             << "1.Editar o asignar valores a la tabla" << endl<<endl
+             << "2.Ver tabla" << endl<<endl
+             << "3.Exportar archivo" << endl<<endl;
         cout << "Selecciona una opcion para continuar: ";
         cin >> menuChoice;
         switch (menuChoice)
@@ -103,7 +102,7 @@ void editTable(vector<vector<string> > &table)
     string choiceByteDir, contentDir;
     system("clear");
     system("cls");
-    cout << "Direcciones" << endl;
+    cout << "Direcciones de memoria" << endl;
     cout << "1. 0000" << endl;
     cout << "2. 0010" << endl;
     cout << "3. 0020" << endl;
@@ -120,11 +119,11 @@ void editTable(vector<vector<string> > &table)
     cout << "14. 00D0" << endl;
     cout << "15. 00E0" << endl;
     cout << "16. 00F0" << endl;
-    cout << "Seleccione una direccion: ";
+    cout << "Seleccione una direccion de memoria: ";
     cin >> choiceMenuDir;
     cout << "Ingrese el byte de la direccion entre 0-F: Byte";
     cin >> choiceByteDir;
-    cout << "Ingrese el contenido en hex a insertar: ";
+    cout << "Ingrese el contenido en hexadecimal valido a insertar: ";
     cin >> contentDir;
 
     if (isValidHex(contentDir)){
@@ -174,7 +173,7 @@ int hexToInt(const string &data)
 
     if (*endptr != '\0')
     {
-        cerr << "Oh! Error: Invalid hexadecimal string: " << data << endl;
+        cerr << "Oh! Error: valor Hex incorrecto: " << data << endl;
         return 0; // You can handle the error as needed
     }
 
@@ -243,7 +242,7 @@ void createFileWithCustomExtension(const string &filename, vector<vector<string>
 void saveTable(vector<vector<string> > &table)
 {
     string filename;
-    cout << "El archivo sera del tipo .HEX" << endl;
+    cout << "El archivo sera guardado con la extension .HEX" << endl;
     cout << "Guardar archivo como: ";
     cin >> filename;
     createFileWithCustomExtension(filename, table);
