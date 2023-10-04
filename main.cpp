@@ -33,7 +33,10 @@ int main()
         vector<string> row;
         for (int j = 0; j < 17; j++)
         {
-            row.push_back("00");
+            if(i==15 && j==15)
+                row.push_back("01");
+            else
+                row.push_back("00");
         }
         table.push_back(row);
     }
@@ -154,11 +157,11 @@ void printTable(const vector<vector<string> > &table, string byte16)
     cout << endl;
     for (size_t i = 0; i < table.size(); ++i)
     {
-        cout << byte16 << " " << intToHex(i) + "0"
+        cout << byte16 << " " <<"0"+intToHex(i) + "0"
              << "  ";
         for (size_t j = 0; j < table[i].size(); ++j)
         {
-            cout << table[i][j] << "  ";
+            cout <<" "+table[i][j] << "  ";
         }
         cout << endl;
     }
