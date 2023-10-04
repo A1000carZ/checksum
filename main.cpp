@@ -4,6 +4,7 @@
 #include <vector>
 #include <sstream>
 #include <fstream>
+#include <iomanip>
 using namespace std;
 
 void editTable(vector<vector<string> > &table);
@@ -170,10 +171,9 @@ int hexToInt(const string &data)
     return static_cast<int>(decimalValue);
 }
 
-string intToHex(int intValue)
-{
+string intToHex(int intValue) {
     ostringstream ss;
-    ss << hex << intValue;
+    ss << hex << std::setw(2) << std::setfill('0') << intValue;
     return ss.str();
 }
 
@@ -201,10 +201,10 @@ void createFileWithCustomExtension(const string &filename, vector<vector<string>
         outputFile << ":020000040000FA" << endl;
         for (int i = 0; i < 16; i++)
         {
-            outputFile << ":" << "10" << "00" + intToHex(i) << "00" << concatenateRow(table[i]) << endl;
+            outputFile << ":" << "1" << "00" + intToHex(i) << "000" << concatenateRow(table[i]) << endl;
         }
 
-        outputFile << ":00000001FF" << endl;
+        outputFile << ":00000001FF";
         // Close the file
         outputFile.close();
 
