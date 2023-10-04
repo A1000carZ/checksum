@@ -9,6 +9,7 @@ using namespace std;
 
 void editTable(vector<vector<string> > &table);
 void saveTable(vector<vector<string> > &table);
+bool isValidHex(string input);
 void printTable(const vector<vector<string> > &table, string base16);
 string concatenateRow(const vector<string> &row);
 int getSumRow(const vector<string> &row);
@@ -122,6 +123,8 @@ void editTable(vector<vector<string> > &table)
     cin >> choiceByteDir;
     cout << "Ingrese el contenido en hex a insertar: ";
     cin >> contentDir;
+
+    if (isValidHex(contentDir)){
     byteDir = hexToInt(choiceByteDir);
 
     table[choiceMenuDir - 1][byteDir] = contentDir;
@@ -133,7 +136,11 @@ void editTable(vector<vector<string> > &table)
         table[i][16] = getCheckSum(totalSum);
     }
 
-    printTable(table, "10");
+    printTable(table, "10");}
+    else{
+        cout << "Lo siento no es un digito valido"<<endl;
+    }
+    cout << endl;
 }
 
 void printTable(const vector<vector<string> > &table, string byte16)
@@ -164,7 +171,7 @@ int hexToInt(const string &data)
 
     if (*endptr != '\0')
     {
-        std::cerr << "Oh! Error: Invalid hexadecimal string: " << data << std::endl;
+        cerr << "Oh! Error: Invalid hexadecimal string: " << data << endl;
         return 0; // You can handle the error as needed
     }
 
@@ -173,8 +180,22 @@ int hexToInt(const string &data)
 
 string intToHex(int intValue) {
     ostringstream ss;
-    ss << hex << std::setw(2) << std::setfill('0') << intValue;
+    ss << hex << setw(2) << setfill('0') << intValue;
     return ss.str();
+}
+
+bool isValidHex(string input) {
+    if (input.empty() || input.length() % 2 != 0) {
+        return false;
+    }
+    for (int i = 0; i<input.size();i++) {
+       
+        if (!((input[i] >= '0' && input[i] <= '9') || (input[i] >= 'A' && input[i] <= 'F') || (input[i] >= 'a' && input[i] <= 'f'))) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 
@@ -208,7 +229,7 @@ void createFileWithCustomExtension(const string &filename, vector<vector<string>
         // Close the file
         outputFile.close();
 
-        cout << "Archivo '" << fullFilename << "' creado correctamente." << endl;
+        cout << "Archivo '" << fullFilename << "' creado correctamente." << endl<<endl;
     }
     else
     {
